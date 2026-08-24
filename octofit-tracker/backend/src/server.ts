@@ -7,9 +7,26 @@ const mongoUri = process.env.MONGODB_URI ?? 'mongodb://127.0.0.1:27017/octofit_d
 
 app.use(express.json());
 
+app.use((_request, response, next) => {
+  response.header('Access-Control-Allow-Origin', '*');
+  response.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE,OPTIONS');
+  response.header('Access-Control-Allow-Headers', 'Content-Type');
+  if (_request.method === 'OPTIONS') {
+    response.sendStatus(204);
+    return;
+  }
+  next();
+});
+
 app.get('/api/health', (_request, response) => {
   response.json({ status: 'ok', database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected' });
 });
+
+for (const component of ['activities', 'leaderboard', 'teams', 'users', 'workouts']) {
+  app.get(`/api/${component}`, (_request, response) => {
+    response.json([]);
+  });
+}
 
 const startServer = async (): Promise<void> => {
   await mongoose.connect(mongoUri);
