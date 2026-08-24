@@ -10,12 +10,12 @@ function App() {
   return (
     <div className="app-shell">
       <header className="app-header">
-        <NavLink className="brand" to="/activities"><span className="brand-mark">O</span><span>OctoFit</span></NavLink>
+        <NavLink className="brand" to="/activities" aria-label="OctoFit home"><span className="brand-mark">O</span><span>OctoFit</span></NavLink>
         <nav className="main-nav" aria-label="Main navigation">
           <NavLink to="/activities">Activities</NavLink>
           <NavLink to="/leaderboard">Leaderboard</NavLink>
           <NavLink to="/teams">Teams</NavLink>
-          <NavLink to="/users">Members</NavLink>
+          <NavLink to="/users">Users</NavLink>
           <NavLink to="/workouts">Workouts</NavLink>
         </nav>
       </header>
