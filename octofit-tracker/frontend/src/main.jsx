@@ -7,6 +7,8 @@ import App from './App.jsx'
 
 const rootElement = document.getElementById('root')
 
+if (!rootElement) throw new Error('OctoFit root element was not found')
+
 createRoot(rootElement).render(
   <StrictMode>
     <BrowserRouter>
